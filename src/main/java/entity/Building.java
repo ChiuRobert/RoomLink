@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="building")
 @NamedQueries({
-	@NamedQuery(name="Building_getAllBuilding", query="SELECT building FROM Building building"),
+	@NamedQuery(name="Building_getAllBuildings", query="SELECT building FROM Building building"),
 	@NamedQuery(name="Building_getById", query="SELECT building FROM Building building WHERE building.id= :id"),
 	@NamedQuery(name="Building_updateName", query="UPDATE Building building SET building.name= :name WHERE building.id= :id")
 })
@@ -95,6 +95,6 @@ public class Building implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Building [name=" + name + "]";
+		return name;
 	}
 }

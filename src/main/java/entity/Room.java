@@ -23,7 +23,8 @@ import javax.persistence.Table;
 @Table(name="room")
 @NamedQueries({
 	@NamedQuery(name="Room_getAllRooms", query="SELECT room FROM Room room"),
-	@NamedQuery(name="Room_getById", query="SELECT user FROM User user WHERE user.id= :id"),
+	@NamedQuery(name="Room_getById", query="SELECT room FROM Room room WHERE room.id= :id"),
+	@NamedQuery(name="Room_getByBuilding", query="SELECT room FROM Room room WHERE room.building= :building"),
 	@NamedQuery(name="Room_updateNumber", query="UPDATE Room room SET room.number= :number WHERE room.id= :id"),
 	@NamedQuery(name="Room_updateBundle", query="UPDATE Room room SET room.bundle= :bundle WHERE room.id= :id")
 })

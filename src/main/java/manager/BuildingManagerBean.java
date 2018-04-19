@@ -18,13 +18,13 @@ public class BuildingManagerBean implements Serializable{
 	private static final String PERSISTENCE_UNIT_NAME = "roomlink";	
 	private static EntityManager entityManager = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
 
-	public static List<Building> getAllBuildings() {
+	public List<Building> getAllBuildings() {
 		TypedQuery<Building> query = entityManager.createNamedQuery("Building_getAllBuildings", Building.class);
 		
 		List<Building> result = query.getResultList();
 		
-		for(Building user : result) {
-			entityManager.refresh(user);
+		for(Building building : result) {
+			entityManager.refresh(building);
 		}
 		
 		if(result.isEmpty()) {
@@ -37,7 +37,7 @@ public class BuildingManagerBean implements Serializable{
 	public static String UpdateName(int id, String name) {
 		entityManager.getTransaction().begin();
 		
-		TypedQuery<Building> query = entityManager.createNamedQuery("Building_pdateName", Building.class);
+		TypedQuery<Building> query = entityManager.createNamedQuery("Building_updateName", Building.class);
 		query.setParameter("id", id);
 		query.setParameter("name", name);
 		

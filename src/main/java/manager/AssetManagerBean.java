@@ -7,27 +7,26 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import entity.User;
+import entity.Asset;
 
-@ManagedBean(name="userManagerBean")
+@ManagedBean(name="assetManagerBean")
 @ViewScoped
-public class UserManagerBean implements Serializable {
+public class AssetManagerBean implements Serializable{
 
-	private static final long serialVersionUID = -2546690392764947202L;
-	
+	private static final long serialVersionUID = 6749096133416010689L;
+
 	private static final String PERSISTENCE_UNIT_NAME = "roomlink";	
 	private static EntityManager entityManager = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
-	
-	public static List<User> getAllUsers() {
-		TypedQuery<User> query = entityManager.createNamedQuery("User_getAllUsers", User.class);
+
+	public static List<Asset> getAllBuildings() {
+		TypedQuery<Asset> query = entityManager.createNamedQuery("Asset_getAllAssets", Asset.class);
 		
-		List<User> result = query.getResultList();
+		List<Asset> result = query.getResultList();
 		
-		for(User user : result) {
-			entityManager.refresh(user);
+		for(Asset asset : result) {
+			entityManager.refresh(asset);
 		}
 		
 		if(result.isEmpty()) {
@@ -37,29 +36,29 @@ public class UserManagerBean implements Serializable {
 		return result;
 	}
 	
-	public static String updatePassword(int id, String password) {
+	public static String UpdateName(int id, String name) {
 		entityManager.getTransaction().begin();
 		
-		Query query = entityManager.createNamedQuery("User_updatePassword", User.class);
+		TypedQuery<Asset> query = entityManager.createNamedQuery("Asset_updateName", Asset.class);
 		query.setParameter("id", id);
-		query.setParameter("password", password);
+		query.setParameter("name", name);
 		
 		query.executeUpdate();
 
-		User user = getById(id);
-		entityManager.merge(user);
+		Asset asset = getById(id);
+		entityManager.merge(asset);
 		entityManager.flush();
 		
         entityManager.getTransaction().commit();
         
-		return "userEdit.xhtml";
+		return "roomEdit.xhtml";
 	}
 	
-	public static User getById(int id) {
-		TypedQuery<User> query = entityManager.createNamedQuery("User_getById", User.class);
+	public static Asset getById(int id) {
+		TypedQuery<Asset> query = entityManager.createNamedQuery("Asset_getById", Asset.class);
 		query.setParameter("id", id);
 		
-		List<User> result = query.getResultList();
+		List<Asset> result = query.getResultList();
 		
 		if(result.isEmpty()) {
 			return null;
@@ -68,15 +67,15 @@ public class UserManagerBean implements Serializable {
 		return result.get(0);
 	}
 	
-	public static void save(User user) {
+	public static void save(Asset asset) {
 		entityManager.getTransaction().begin();
-        entityManager.persist(user);
+        entityManager.persist(asset);
         entityManager.getTransaction().commit();
 	}
 	
-	public static void remove(User user) {
+	public static void remove(Asset asset)  {
 		entityManager.getTransaction().begin();
-		entityManager.remove(user);
+		entityManager.remove(asset);
 		entityManager.getTransaction().commit();
 	}
 }

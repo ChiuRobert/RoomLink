@@ -12,27 +12,27 @@
 </h:head>
 
 <h:body>
-    <center><h2><h:outputText value="Building Records"/></h2></center>
-    <h:form id="buildingForm">
-        <h:dataTable id="buildingTable" binding="#{building}" value="#{buildingBean.getAllBuildings()}" var="building" styleClass="table table-striped table-bordered tableUpdated">
+    <center><h2><h:outputText value="Building Assets"/></h2></center>
+    <h:form id="assetForm">
+        <h:dataTable id="assetTable" binding="#{asset}" value="#{assetBean.getAllAssets()}" var="asset" styleClass="table table-striped table-bordered tableUpdated">
             <h:column>
                 <f:facet name="header">Id</f:facet>
-                <h:outputText value="#{building.id}" />                
+                <h:outputText value="#{asset.id}" />                
             </h:column>
             <h:column>
                 <f:facet name="header">Name</f:facet>
-                <h:outputText value="#{building.name}" />
+                <h:outputText value="#{asset.name}" />
             </h:column>                      
             <h:column>
                 <f:facet name="header">Update</f:facet>
-                <h:commandButton action="#{buildingBean.editBuildingDetailsById(building)}" value="Update" styleClass="btn btn-primary" />
+                <h:commandButton action="#{assetBean.editAssetDetailsById(asset)}" value="Update" styleClass="btn btn-primary" />
             </h:column>
             <h:column>
                 <f:facet name="header">Delete</f:facet>
-                <h:commandButton action="#{buildingBean.deleteBuilding(building)}" value="Delete" styleClass="btn btn-danger" />
+                <h:commandButton action="#{assetBean.deleteAsset(asset)}" value="Delete" styleClass="btn btn-danger" />
             </h:column>
         </h:dataTable>
-        <center><h:commandButton action="newBuilding.xhtml?faces-redirect=true" value="Add New Building" styleClass="btn btn-success btnSpace" /></center>
+        <center><h:commandButton action="newAsset.xhtml?faces-redirect=true" value="Add New Asset" styleClass="btn btn-success btnSpace" /></center>
         <br/>
         <h:commandButton action="/index.xhtml?faces-redirect=true" value="Menu" styleClass="btn btn-success btnSpace" />
     </h:form>

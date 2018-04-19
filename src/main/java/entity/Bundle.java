@@ -10,10 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="bundle")
+@NamedQueries({
+	@NamedQuery(name="Bundle_getAllBundles", query="SELECT bundle FROM Bundle bundle")
+})
 public class Bundle implements Serializable{
 
 	private static final long serialVersionUID = 2762114681087257980L;
@@ -74,6 +79,6 @@ public class Bundle implements Serializable{
 			temp += asset.getName();
 			temp += " | ";
 		}
-		return "Bundle [id=" + id + "Asset: " + temp + "]";
+		return id + " : " + temp;
 	}
 }

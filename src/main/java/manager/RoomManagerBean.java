@@ -4,14 +4,17 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import entity.Building;
 import entity.Bundle;
 import entity.Room;
 
 @ManagedBean(name="roomManagerBean")
+@ViewScoped
 public class RoomManagerBean implements Serializable{
 
 	private static final long serialVersionUID = 3643421975790627267L;
@@ -24,11 +27,24 @@ public class RoomManagerBean implements Serializable{
 		
 		List<Room> result = query.getResultList();
 		
-		for(Room user : result) {
-			entityManager.refresh(user);
+		for (Room room : result) {
+			entityManager.refresh(room);
 		}
 		
-		if(result.isEmpty()) {
+		if (result.isEmpty()) {
+			return null;
+		}
+		
+		return result;
+	}
+	
+	public static List<Room> GetByBuilding(Building building) {
+		TypedQuery<Room> query = entityManager.createNamedQuery("Room_getByBuilding", Room.class);
+		query.setParameter("building", building);
+		
+		List<Room> result = query.getResultList();
+		
+		if (result.isEmpty()) {
 			return null;
 		}
 		
@@ -77,7 +93,7 @@ public class RoomManagerBean implements Serializable{
 		
 		List<Room> result = query.getResultList();
 		
-		if(result.isEmpty()) {
+		if (result.isEmpty()) {
 			return null;
 		}
 		

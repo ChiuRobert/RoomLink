@@ -6,12 +6,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import entity.Building;
 import manager.BuildingManagerBean;
 
 @ManagedBean
+@ViewScoped
 public class BuildingBean implements Serializable{
 
 	private static final long serialVersionUID = -8996765940364501163L;
@@ -32,7 +34,7 @@ public class BuildingBean implements Serializable{
 	}
 	
 	public List<Building> getAllBuildings() {
-		return BuildingManagerBean.getAllBuildings();		
+		return null;//BuildingManagerBean.getAllBuildings();		
 	}
 
 	public String addBuilding() {

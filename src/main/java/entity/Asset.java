@@ -13,10 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="asset")
+@NamedQueries({
+	@NamedQuery(name="Asset_getAllAssets", query="SELECT asset FROM Asset asset"),
+	@NamedQuery(name="Asset_getById", query="SELECT asset FROM Asset asset WHERE asset.id= :id"),
+	@NamedQuery(name="Asset_updateName", query="UPDATE Asset asset SET asset.name= :name WHERE asset.id= :id")
+})
 public class Asset implements Serializable{
 
 	private static final long serialVersionUID = -1479940881611392857L;
