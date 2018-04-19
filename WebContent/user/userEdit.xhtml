@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      
+<h:head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="table.css" />	    
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <title>Room Link</title>
+</h:head>
+
+<h:body>
+	<center><h2><h:outputText value="Edit User"/></h2></center>
+        <h:form id="editUserForm" styleClass="form-horizontal">                        
+            <div class="form-group">
+                <h:outputLabel id="idLabel" styleClass="control-label col-sm-2">Id:</h:outputLabel>
+                <div class="col-sm-4"><h:inputText id="idInput" value="#{userBean.user.id}" p:readonly="readonly" styleClass="form-control" /></div>
+            </div>
+            <div class="form-group">
+                <h:outputLabel id="nameLabel" styleClass="control-label col-sm-2">User Name:</h:outputLabel>
+                <div class="col-sm-4"><h:inputText id="nameInput" value="#{userBean.user.userName}" p:readonly="readonly" styleClass="form-control" /></div>
+            </div>      
+            <div class="form-group">
+                <h:outputLabel id="passwordLabel" styleClass="control-label col-sm-2">New Password:</h:outputLabel>
+                <div class="col-sm-4"><h:inputText id="passwordInput" value="#{userBean.user.password}" styleClass="form-control" /></div>
+            </div>                 
+            <div class="form-group">
+                <div class="col-sm-2" />
+                <div class="col-sm-4">
+                    <h:commandButton value="Update" action="#{userBean.updateUserDetails()}" styleClass="btn btn-primary updateBtnStyle" />
+                </div>
+                <div class="col-sm-1" />
+                <div class="col-sm-updated"><h:outputLink value="usersList.xhtml">View Users Record List</h:outputLink></div>
+            </div>
+            <div class="text text-success text-edit"><h:message for="idInput" /></div>
+        </h:form>
+    </h:body>
+</html>

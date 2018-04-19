@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+ 	  xmlns:h="http://java.sun.com/jsf/html"  
+ 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+ 	  
+<h:head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="table.css" />         
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <title>RoomLink</title>  
+</h:head>
+
+<h:body>
+    <center><h2><h:outputText value="User Records"/></h2></center>
+    <h:form id="usersForm">
+        <h:dataTable id="usersTable" binding="#{table}" value="#{userBean.getAllUsers()}" var="user" styleClass="table table-striped table-bordered tableUpdated">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
+                <h:outputText value="#{user.id}" />                
+            </h:column>
+            <h:column>
+                <f:facet name="header">User Name</f:facet>
+                <h:outputText value="#{user.userName}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Password</f:facet>
+                <h:outputText value="#{user.password}" />
+            </h:column>            
+            <h:column>
+                <f:facet name="header">Update</f:facet>
+                <h:commandButton action="#{userBean.editUserDetailsById(user)}" value="Update" styleClass="btn btn-primary" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Delete</f:facet>
+                <h:commandButton action="#{userBean.deleteUser(user)}" value="Delete" styleClass="btn btn-danger" />
+            </h:column>
+        </h:dataTable>
+        <center><h:commandButton action="newUser.xhtml?faces-redirect=true" value="Add New User" styleClass="btn btn-success btnSpace" /></center>
+    </h:form>
+</h:body>
+</html>

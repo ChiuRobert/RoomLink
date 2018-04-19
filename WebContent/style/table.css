@@ -1,0 +1,34 @@
+.tableUpdated {
+	width: 90% !important;
+	margin: 17px 58px 0 !important;
+}
+
+.btnSpace {
+	margin: 17px;
+}
+
+.btnWidth {
+	width: 80px;
+}
+
+.col-sm-updated {
+	padding-top: 7px;
+}
+
+.col-sm-updated a {
+	margin-left: 30px;
+	text-decoration: none !important;
+}
+
+.col-sm-27 {
+	width: 27% !important;
+}
+
+.updateBtnStyle {
+	width: 80px !important;
+}
+
+.text-edit {
+	margin-left: 123px !important;
+	margin-top: 29px !important;
+}

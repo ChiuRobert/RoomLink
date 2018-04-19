@@ -1,0 +1,14 @@
+ALTER TABLE room DROP FOREIGN KEY FK_room_bundle
+ALTER TABLE room DROP FOREIGN KEY FK_room_building
+ALTER TABLE booking DROP FOREIGN KEY FK_booking_userId
+ALTER TABLE booking DROP FOREIGN KEY FK_booking_roomId
+ALTER TABLE assetbundle DROP FOREIGN KEY FK_assetbundle_bundleId
+ALTER TABLE assetbundle DROP FOREIGN KEY FK_assetbundle_assetId
+DROP TABLE user
+DROP TABLE room
+DROP TABLE asset
+DROP TABLE bundle
+DROP TABLE booking
+DROP TABLE building
+DROP TABLE assetbundle
+DELETE FROM SEQUENCE WHERE SEQ_NAME = 'SEQ_GEN_TABLE'
