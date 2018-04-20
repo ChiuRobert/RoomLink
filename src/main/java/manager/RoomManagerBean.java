@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -14,7 +15,7 @@ import entity.Bundle;
 import entity.Room;
 
 @ManagedBean(name="roomManagerBean")
-@ViewScoped
+@SessionScoped
 public class RoomManagerBean implements Serializable{
 
 	private static final long serialVersionUID = 3643421975790627267L;
@@ -22,7 +23,7 @@ public class RoomManagerBean implements Serializable{
 	private static final String PERSISTENCE_UNIT_NAME = "roomlink";	
 	private static EntityManager entityManager = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
 	
-	public static List<Room> getAllRooms() {
+	public List<Room> getAllRooms() {
 		TypedQuery<Room> query = entityManager.createNamedQuery("Room_getAllRooms", Room.class);
 		
 		List<Room> result = query.getResultList();
@@ -38,7 +39,7 @@ public class RoomManagerBean implements Serializable{
 		return result;
 	}
 	
-	public static List<Room> GetByBuilding(Building building) {
+	public List<Room> GetByBuilding(Building building) {
 		TypedQuery<Room> query = entityManager.createNamedQuery("Room_getByBuilding", Room.class);
 		query.setParameter("building", building);
 		
@@ -51,10 +52,10 @@ public class RoomManagerBean implements Serializable{
 		return result;
 	}
 	
-	public static String UpdateNumber(int id, String number) {
+	public void UpdateNumber(int id, String number) {
 		entityManager.getTransaction().begin();
 		
-		TypedQuery<Room> query = entityManager.createNamedQuery("Room_pdateNumber", Room.class);
+		TypedQuery<Room> query = entityManager.createNamedQuery("Room_updateNumber", Room.class);
 		query.setParameter("id", id);
 		query.setParameter("number", number);
 		
@@ -65,11 +66,9 @@ public class RoomManagerBean implements Serializable{
 		entityManager.flush();
 		
         entityManager.getTransaction().commit();
-        
-		return "roomEdit.xhtml";
 	}
 	
-	public static String UpdateBundle(int id, Bundle bundle) {
+	public void UpdateBundle(int id, Bundle bundle) {
 		entityManager.getTransaction().begin();
 		
 		TypedQuery<Room> query = entityManager.createNamedQuery("Room_updateBundle", Room.class);
@@ -83,11 +82,9 @@ public class RoomManagerBean implements Serializable{
 		entityManager.flush();
 		
         entityManager.getTransaction().commit();
-        
-		return "roomEdit.xhtml";
 	}
 	
-	public static Room getById(int id) {
+	public Room getById(int id) {
 		TypedQuery<Room> query = entityManager.createNamedQuery("Room_getById", Room.class);
 		query.setParameter("id", id);
 		

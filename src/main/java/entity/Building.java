@@ -21,7 +21,8 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name="Building_getAllBuildings", query="SELECT building FROM Building building"),
 	@NamedQuery(name="Building_getById", query="SELECT building FROM Building building WHERE building.id= :id"),
-	@NamedQuery(name="Building_updateName", query="UPDATE Building building SET building.name= :name WHERE building.id= :id")
+	@NamedQuery(name="Building_updateName", query="UPDATE Building building SET building.name= :name WHERE building.id= :id"),
+	@NamedQuery(name="Building_findByName", query="SELECT building FROM Building building WHERE building.name= :name")
 })
 public class Building implements Serializable{
 

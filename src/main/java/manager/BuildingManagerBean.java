@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import entity.Building;
+import entity.Bundle;
 
 @ManagedBean(name="buildingManagerBean")
+@SessionScoped
 public class BuildingManagerBean implements Serializable{
 
 	private static final long serialVersionUID = -8910868015867550517L;
@@ -34,7 +37,20 @@ public class BuildingManagerBean implements Serializable{
 		return result;
 	}
 	
-	public static String UpdateName(int id, String name) {
+	public Building findByName(String name) {
+		TypedQuery<Building> query = entityManager.createNamedQuery("Building_findByName", Building.class);
+		query.setParameter("name", name);
+		
+		List<Building> result = query.getResultList();
+		
+		if (result.isEmpty()) {
+			return null;
+		}
+		
+		return result.get(0);
+	}
+	
+	public String UpdateName(int id, String name) {
 		entityManager.getTransaction().begin();
 		
 		TypedQuery<Building> query = entityManager.createNamedQuery("Building_updateName", Building.class);
@@ -52,7 +68,7 @@ public class BuildingManagerBean implements Serializable{
 		return "roomEdit.xhtml";
 	}
 	
-	public static Building getById(int id) {
+	public Building getById(int id) {
 		TypedQuery<Building> query = entityManager.createNamedQuery("Building_getById", Building.class);
 		query.setParameter("id", id);
 		

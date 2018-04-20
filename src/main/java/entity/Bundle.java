@@ -17,7 +17,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="bundle")
 @NamedQueries({
-	@NamedQuery(name="Bundle_getAllBundles", query="SELECT bundle FROM Bundle bundle")
+	@NamedQuery(name="Bundle_getAllBundles", query="SELECT bundle FROM Bundle bundle"),
+	@NamedQuery(name="Bundle_getById", query="SELECT bundle FROM Bundle bundle WHERE bundle.id= :id"),
 })
 public class Bundle implements Serializable{
 

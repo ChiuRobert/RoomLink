@@ -15,56 +15,38 @@
 <h:body>
 	<center><h2><h:outputText value="Create Room"/></h2></center>
    	<h:form id="roomBeanForm" styleClass="form-horizontal">        
+	    <p:growl id="msgs" showDetail="true" />
+	    <p:panel style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+	          <p:outputLabel for="number" value="Number:" />
+	          <p:inputText id="number" value="#{roomBean.number}" required="true" label="number" />
+	          
+			  <p:outputLabel for="bundle" value="Bundle: " />
+	          <p:selectOneMenu id="bundle" value="#{roomBean.bundle}" style="width:300px">
+	              <f:selectItem itemLabel="Select Bundle" itemValue="" noSelectionOption="false" />
+	              <f:selectItems value="#{roomBean.bundleList}" />
+	          </p:selectOneMenu>
+	
+	          <p:outputLabel for="building" value="Building: " />
+	          <p:selectOneMenu id="building" value="#{roomBean.building}" style="width:300px">
+	              <f:selectItem itemLabel="Select Building" itemValue="" noSelectionOption="false" />
+	              <f:selectItems value="#{roomBean.buildingList}" />
+	          </p:selectOneMenu>
+			</h:panelGrid>
+			<p:separator />
+			<p:commandButton value="Submit" update="msgs" actionListener="#{roomBean.addRoom()}" icon="ui-icon-check" />
+		</p:panel>
+         
         <div class="form-group">
-            <h:outputLabel id="nameLabel" styleClass="control-label col-sm-4">Number:</h:outputLabel>
-            <div class="col-sm-4">
-                <h:inputText id="nameInput" value="#{roomBean.room.number}" styleClass="form-control" required="true" requiredMessage="Number Cannot Be Blank" />
-            </div>
-            <h:message for="nameInput" styleClass="text text-danger" />
-        </div>      
-       
-       <p:growl id="msgs" showDetail="true" />
-       <p:panel header="Select a Location" style="margin-bottom:10px;">
-        <h:panelGrid columns="2" cellpadding="5">
-			<p:outputLabel for="bundle" value="Bundle: " />
-            <p:selectOneMenu id="bundle" value="#{roomBean.bundle}" style="width:300px">
-                <f:selectItem itemLabel="Select Bundle" itemValue="" noSelectionOption="true" />
-                <f:selectItems value="#{roomBean.bundleList}" />
-            </p:selectOneMenu>
- 
-            <p:outputLabel for="building" value="Building: " />
-            <p:selectOneMenu id="building" value="#{roomBean.building}" style="width:300px">
-                <f:selectItem itemLabel="Select Building" itemValue="" noSelectionOption="true" />
-                <f:selectItems value="#{roomBean.buildingList}" />
-            </p:selectOneMenu>
-        </h:panelGrid>
-                         <p:separator />
- 
-        <p:commandButton value="Submit" update="msgs" actionListener="#{roomBean.addRoom()}" icon="ui-icon-check" />
-    </p:panel>    
-<!--         <div class="form-group">
-            <h:outputLabel id="bundleLabel" styleClass="control-label col-sm-4">Bundle:</h:outputLabel>
-            <div class="col-sm-4">
-                <h:inputText id="bundleInput" value="#{roomBean.room.bundle}" styleClass="form-control" />
-            </div>
-            <h:message for="bundleInput" styleClass="text text-danger" />
-        </div>	    
-        <div class="form-group">
-            <h:outputLabel id="buildingLabel" styleClass="control-label col-sm-4">Building:</h:outputLabel>
-            <div class="col-sm-4">
-                <h:inputText id="buildingInput" value="#{roomBean.room.building}" styleClass="form-control" />
-            </div>
-            <h:message for="buildingInput" styleClass="text text-danger" />
-        </div>	 -->            
-        <div class="form-group">
-            <div class="col-sm-2 col-sm-27" />
-            <div class="col-sm-4">
-                <div class="col-sm-2"><p:commandButton value="Save" actionListener="#{roomBean.addRoom()}" styleClass="btn btn-success btnWidth" /></div>
-                <div class="col-sm-1" />
-                <div class="col-sm-updated"><h:outputLink value="roomList.xhtml">View Room</h:outputLink></div>
-            </div>
-        </div>
-       </h:form>
+           <div class="col-sm-2 col-sm-27" />
+           <div class="col-sm-4">
+               <div class="col-sm-2"><p:commandButton value="" actionListener="#{roomBean.addRoom()}" styleClass="btn btn-success btnWidth" rendered="false"/></div>
+               <div class="col-sm-1" />
+               <div class="col-sm-updated"><h:outputLink value="roomList.xhtml">View Room</h:outputLink></div>
+           </div>
+       </div>
+       <div class="text text-success text-edit"><h:message for="idInput" /></div>
+      </h:form> 
 </h:body>
 </html>	
 

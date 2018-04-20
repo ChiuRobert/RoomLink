@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import entity.Building;
 import entity.Bundle;
 
 @ManagedBean(name="bundleManagerBean")
+@SessionScoped
 public class BundleManagerBean implements Serializable {
 
 	private static final long serialVersionUID = 2780587959696799231L;
@@ -33,6 +36,20 @@ public class BundleManagerBean implements Serializable {
 		
 		return result;
 	}
+	
+	public Bundle getById(int id) {
+		TypedQuery<Bundle> query = entityManager.createNamedQuery("Bundle_getById", Bundle.class);
+		query.setParameter("id", id);
+		
+		List<Bundle> result = query.getResultList();
+		
+		if(result.isEmpty()) {
+			return null;
+		}
+		
+		return result.get(0);
+	}
+	
 	
 	public void save(Bundle bundle) {
 		entityManager.getTransaction().begin();

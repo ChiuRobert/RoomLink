@@ -56,6 +56,6 @@ public class BuildingBean implements Serializable{
 
 	public String updateBuildingDetails() {
 		FacesContext.getCurrentInstance().addMessage("editBuildingForm:idInput", new FacesMessage("The building has been succesfully updated"));
-		return BuildingManagerBean.UpdateName(building.getId(), building.getName());
+		return null;//BuildingManagerBean.UpdateName(building.getId(), building.getName());
 	}
 }
