@@ -63,7 +63,7 @@ public class Room implements Serializable{
 		this.number = number;
 	}
 	
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "bundle")
 	public Bundle getBundle() {
 		return bundle;
@@ -80,7 +80,7 @@ public class Room implements Serializable{
 		this.userRoomList = userRoomList;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)   
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)   
 	@JoinColumn(name = "building")
 	public Building getBuilding() {
 		return building;

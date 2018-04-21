@@ -22,7 +22,8 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name="Asset_getAllAssets", query="SELECT asset FROM Asset asset"),
 	@NamedQuery(name="Asset_getById", query="SELECT asset FROM Asset asset WHERE asset.id= :id"),
-	@NamedQuery(name="Asset_updateName", query="UPDATE Asset asset SET asset.name= :name WHERE asset.id= :id")
+	@NamedQuery(name="Asset_updateName", query="UPDATE Asset asset SET asset.name= :name WHERE asset.id= :id"),
+	@NamedQuery(name="Asset_findByName", query="SELECT asset FROM Asset asset WHERE asset.name= :name")
 })
 public class Asset implements Serializable{
 
@@ -56,7 +57,7 @@ public class Asset implements Serializable{
 		this.name = name;
 	}
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "assetbundle", joinColumns = @JoinColumn(name = "assetId", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "bundleId", referencedColumnName = "id"))
 	public List<Bundle> getBundleList() {
 		return bundleList;
@@ -65,10 +66,15 @@ public class Asset implements Serializable{
 		this.bundleList = bundleList;
 	}
 	
-	public void addBundle(Bundle bundle) {
+/*	public void addBundle(Bundle bundle) {
 		bundleList.add(bundle);
 		bundle.getAssetList().add(this);
+	}*/
+	
+	public void removeBundle(Bundle bundle) {
+		bundleList.remove(bundle);
 	}
+	
 	
 	@Override
 	public int hashCode() {
@@ -104,6 +110,6 @@ public class Asset implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Asset [name=" + name + "]";
+		return name;
 	}	
 }

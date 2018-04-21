@@ -12,35 +12,27 @@
 </h:head>
 
 <h:body>
-    <center><h2><h:outputText value="Room Records"/></h2></center>
-    <h:form id="roomForm">
-        <h:dataTable id="roomTable" binding="#{room}" value="#{roomBean.getAllRooms()}" var="room" styleClass="table table-striped table-bordered tableUpdated">
+    <center><h2><h:outputText value="Bundle Records"/></h2></center>
+    <h:form id="bundleForm">
+        <h:dataTable id="bundleTable" binding="#{bundle}" value="#{bundleBean.getAllBundles()}" var="bundle" styleClass="table table-striped table-bordered tableUpdated">
             <h:column>
                 <f:facet name="header">Id</f:facet>
-                <h:outputText value="#{room.id}" />                
-            </h:column>
-            <h:column>
-                <f:facet name="header">Number</f:facet>
-                <h:outputText value="#{room.number}" />
+                <h:outputText value="#{bundle.id}" />                
             </h:column>
             <h:column>
                 <f:facet name="header">Assets</f:facet>
-                <h:outputText value="#{room.bundle}" />
-            </h:column> 
-            <h:column>
-                <f:facet name="header">Building</f:facet>
-                <h:outputText value="#{room.building.name}" />
+                <h:outputText value="#{bundle}" />
             </h:column>                        
             <h:column>
                 <f:facet name="header">Update</f:facet>
-                <h:commandButton action="#{roomBean.editRoomDetailsById(room)}" value="Update" styleClass="btn btn-primary" />
+                <h:commandButton action="#{bundleBean.editBundleDetailsById(bundle)}" value="Update" styleClass="btn btn-primary" />
             </h:column>
             <h:column>
                 <f:facet name="header">Delete</f:facet>
-                <h:commandButton action="#{roomBean.deleteRoom(room)}" value="Delete" styleClass="btn btn-danger" />
+                <h:commandButton action="#{bundleBean.deleteBundle(bundle)}" value="Delete" styleClass="btn btn-danger" />
             </h:column>
         </h:dataTable>
-        <center><h:commandButton action="newRoom.xhtml?faces-redirect=true" value="Add New Room" styleClass="btn btn-success btnSpace" /></center>
+        <center><h:commandButton action="newBundle.xhtml?faces-redirect=true" value="Add New Bundle" styleClass="btn btn-success btnSpace" /></center>
         <br/>
         <h:commandButton action="/index.xhtml?faces-redirect=true" value="Menu" styleClass="btn btn-success btnSpace" />        
     </h:form>

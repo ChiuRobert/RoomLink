@@ -63,31 +63,31 @@ public class RoomBean implements Serializable{
 			}
 			building = buildingManagerBean.findByName(buildingString);
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage("roomBeanForm:idInput", new FacesMessage("You need to choose a building."));
+			showMessage("You need to choose a building.");
 			canAdd = false;
 		}
 		try {
 			bundle = bundleManagerBean.getById(Integer.parseInt(bundleString.substring(0, 1)));
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage("roomBeanForm:idInput", new FacesMessage("You need to choose a bundle."));
+			showMessage("You need to choose a bundle.");
 			canAdd = false;
 		}
-		
+			
 		if (canAdd) {
 			room.setBuilding(building);
 			room.setBundle(bundle);
 			room.setNumber(number);
 			
-			RoomManagerBean.save(room);
+			roomManagerBean.save(room);
 			
-			FacesContext.getCurrentInstance().addMessage("roomBeanForm:idInput", new FacesMessage("Room added successfully."));
+			showMessage("Room added successfully.");
 		}
 		
 		return "roomList.xhtml?faces-redirect=true";	
 	}
 	
 	public String deleteRoom(Room room) {		
-		RoomManagerBean.remove(room);
+		roomManagerBean.remove(room);
 		
 		return "roomList.xhtml?faces-redirect=true";
 	}
@@ -108,7 +108,7 @@ public class RoomBean implements Serializable{
 			Bundle bundle = bundleManagerBean.getById(Integer.parseInt(bundleString.substring(0, 1)));
 			roomManagerBean.UpdateBundle(room.getId(), bundle);
 		} else {
-			FacesContext.getCurrentInstance().addMessage("editRoomForm:idInput", new FacesMessage("You need to choose a bundle."));
+			showMessage("You need to choose a bundle.");
 			canUpdate = false;
 		}
 		
@@ -117,9 +117,13 @@ public class RoomBean implements Serializable{
 		}
 		
 		if (canUpdate) {
-			FacesContext.getCurrentInstance().addMessage("editRoomForm:idInput", new FacesMessage("The room has been successfully updated."));
+			showMessage("The room has been successfully updated.");
 		}
 		return "roomEdit.xhtml";
+	}
+	
+	public void showMessage(String message) {
+		FacesContext.getCurrentInstance().addMessage("editRoomForm:idInput", new FacesMessage(message));
 	}
 	
 	public Room getRoom() {

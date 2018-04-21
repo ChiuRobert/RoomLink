@@ -18,7 +18,8 @@ public class Generator {
 	private static EntityManager entityManager = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
 	
 	private static void createConnection(Asset asset, Bundle bundle) {
-		asset.addBundle(bundle);
+		bundle.addAsset(asset); 
+		//asset.addBundle(bundle); 
 	}
 	
 	private static void save(Object o) {
@@ -28,7 +29,7 @@ public class Generator {
 	public static void main(String[] args) {
 		// <-- Begin transaction --> \\
 		entityManager.getTransaction().begin();
-		
+			
 		// <-- Create Bundles --> \\S
 		Bundle b1 = new Bundle();
 		Bundle b2 = new Bundle();
@@ -103,22 +104,25 @@ public class Generator {
 		save(b1);
 		save(b2);
 		save(b3);
-		
+
 		save(a1);
 		save(a2);
 		save(a3);
 		save(a4);
 		save(a5);
 		save(a6);
-		
+
 		save(u1);
 		save(u2);
 		save(u3);
 		
+		save(bd1);
+		save(bd2);
+
 		save(r1);
 		save(r2);
 		save(r3);
-		
+
 		save(ur1);
 		save(ur2);
 		save(ur3);

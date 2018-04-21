@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
@@ -97,13 +96,13 @@ public class RoomManagerBean implements Serializable{
 		return result.get(0);
 	}
 	
-	public static void save(Room room) {
+	public void save(Room room) {
 		entityManager.getTransaction().begin();
         entityManager.persist(room);
         entityManager.getTransaction().commit();
 	}
 	
-	public static void remove(Room room)  {
+	public void remove(Room room)  {
 		entityManager.getTransaction().begin();
 		entityManager.remove(room);
 		entityManager.getTransaction().commit();

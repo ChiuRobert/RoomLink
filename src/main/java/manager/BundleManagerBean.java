@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import entity.Building;
 import entity.Bundle;
 
 @ManagedBean(name="bundleManagerBean")
@@ -54,6 +53,12 @@ public class BundleManagerBean implements Serializable {
 	public void save(Bundle bundle) {
 		entityManager.getTransaction().begin();
         entityManager.persist(bundle);
+        entityManager.getTransaction().commit();
+	}
+	
+	public void merge(Bundle bundle) {
+		entityManager.getTransaction().begin();
+        entityManager.merge(bundle);
         entityManager.getTransaction().commit();
 	}
 	

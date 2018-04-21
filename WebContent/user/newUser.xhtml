@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" 
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
 	  
 <h:head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" http-equiv="X-UA-Conpatible" />
@@ -13,29 +14,31 @@
 	
 <h:body>
 	<center><h2><h:outputText value="Create User"/></h2></center>
-   	<h:form id="userBeanForm" styleClass="form-horizontal">        
+   	<h:form id="userBeanForm" styleClass="form-horizontal">       
+	    <p:growl id="msgs" showDetail="true" />
         <div class="form-group">
             <h:outputLabel id="nameLabel" styleClass="control-label col-sm-4">Name:</h:outputLabel>
             <div class="col-sm-4">
-                <h:inputText id="nameInput" value="#{userBean.user.userName}" styleClass="form-control" required="true" requiredMessage="User Name Cannot Be Blank" />
+                <h:inputText id="nameInput" value="#{userBean.userNameString}" styleClass="form-control" required="true" requiredMessage="User Name Cannot Be Blank" />
             </div>
             <h:message for="nameInput" styleClass="text text-danger" />
         </div>       
         <div class="form-group">
             <h:outputLabel id="passwordLabel" styleClass="control-label col-sm-4">Password:</h:outputLabel>
             <div class="col-sm-4">
-                <h:inputText id="passwordInput" value="#{userBean.user.password}" styleClass="form-control" required="true" requiredMessage="Password Cannot Be Blank" />
+                <h:inputText id="passwordInput" value="#{userBean.passwordString}" styleClass="form-control" required="true" requiredMessage="Password Cannot Be Blank" />
             </div>
             <h:message for="passwordInput" styleClass="text text-danger" />
-        </div>	         
+        </div>	         	         
         <div class="form-group">
             <div class="col-sm-2 col-sm-27" />
             <div class="col-sm-4">
-                <div class="col-sm-2"><h:commandButton value="Save" action="#{userBean.addUser()}" styleClass="btn btn-success btnWidth" /></div>
+                <div class="col-sm-2"><h:commandButton value="Save" update="msgs" action="#{userBean.addUser()}" styleClass="btn btn-success btnWidth" /></div>
                 <div class="col-sm-1" />
                 <div class="col-sm-updated"><h:outputLink value="usersList.xhtml">View Users</h:outputLink></div>
             </div>
         </div>
+       <div class="text text-success text-edit"><h:message for="idInput" /></div>        
        </h:form>
 </h:body>
 </html>	

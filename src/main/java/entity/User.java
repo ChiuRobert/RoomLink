@@ -20,7 +20,8 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name="User_getAllUsers", query="SELECT user FROM User user"),
 	@NamedQuery(name="User_getById", query="SELECT user FROM User user WHERE user.id= :id"),
-	@NamedQuery(name="User_updatePassword", query="UPDATE User user SET user.password= :password WHERE user.id= :id")
+	@NamedQuery(name="User_updatePassword", query="UPDATE User user SET user.password= :password WHERE user.id= :id"),
+	@NamedQuery(name="User_findByName", query="SELECT user FROM User user WHERE user.userName= :userName")
 })
 public class User implements Serializable{
 

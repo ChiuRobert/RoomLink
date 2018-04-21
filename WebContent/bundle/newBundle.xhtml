@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+<h:head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />	 
+  	<link rel="stylesheet" type="text/css" href="table.css" />		   
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <title>RoomLink</title>
+</h:head>
+	
+<h:body>
+	<center><h2><h:outputText value="Create Bundle"/></h2></center>
+   	<h:form id="bundleBeanForm" styleClass="form-horizontal">        
+	    <p:growl id="msgs" showDetail="true" />
+	    <p:panel style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+		        <h:outputLabel for="assets" value="Assets:" />
+		        <p:selectCheckboxMenu id="assets" value="#{bundleBean.selectedAssets}" label="Assets" multiple="true"
+		                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+		            <f:selectItems value="#{bundleBean.assets}" />
+		        </p:selectCheckboxMenu>
+			</h:panelGrid>
+			<p:separator />
+			<p:commandButton value="Submit" update="msgs" actionListener="#{bundleBean.addBundle()}" icon="ui-icon-check" />
+		</p:panel>
+         
+        <div class="form-group">
+           <div class="col-sm-2 col-sm-27" />
+           <div class="col-sm-4">
+               <div class="col-sm-2"><p:commandButton value="" actionListener="#{bundleBean.addBundle()}" styleClass="btn btn-success btnWidth" rendered="false"/></div>
+               <div class="col-sm-1" />
+               <div class="col-sm-updated"><h:outputLink value="bundleList.xhtml">View Bundle</h:outputLink></div>
+           </div>
+       </div>
+       <div class="text text-success text-edit"><h:message for="idInput" /></div>
+      </h:form> 
+</h:body>
+</html>	
+

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,12 +40,21 @@ public class Bundle implements Serializable{
 		this.id = id;
 	}
 	
-	@ManyToMany(mappedBy = "bundleList")
+	@ManyToMany(mappedBy = "bundleList", cascade = CascadeType.ALL)
 	public List<Asset> getAssetList() {
 		return assetList;
 	}
 	public void setAssetList(List<Asset> assetList) {
 		this.assetList = assetList;
+	}
+	
+	public void addAsset(Asset asset) {
+		assetList.add(asset);
+		asset.getBundleList().add(this);
+	}
+	
+	public void removeAsset(Asset asset) {
+		assetList.remove(asset);
 	}
 	
 	@Override

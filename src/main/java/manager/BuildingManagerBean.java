@@ -10,7 +10,6 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import entity.Building;
-import entity.Bundle;
 
 @ManagedBean(name="buildingManagerBean")
 @SessionScoped
@@ -50,7 +49,7 @@ public class BuildingManagerBean implements Serializable{
 		return result.get(0);
 	}
 	
-	public String UpdateName(int id, String name) {
+	public void UpdateName(int id, String name) {
 		entityManager.getTransaction().begin();
 		
 		TypedQuery<Building> query = entityManager.createNamedQuery("Building_updateName", Building.class);
@@ -64,8 +63,6 @@ public class BuildingManagerBean implements Serializable{
 		entityManager.flush();
 		
         entityManager.getTransaction().commit();
-        
-		return "roomEdit.xhtml";
 	}
 	
 	public Building getById(int id) {
@@ -81,13 +78,13 @@ public class BuildingManagerBean implements Serializable{
 		return result.get(0);
 	}
 	
-	public static void save(Building building) {
+	public void save(Building building) {
 		entityManager.getTransaction().begin();
         entityManager.persist(building);
         entityManager.getTransaction().commit();
 	}
 	
-	public static void remove(Building building)  {
+	public void remove(Building building)  {
 		entityManager.getTransaction().begin();
 		entityManager.remove(building);
 		entityManager.getTransaction().commit();
