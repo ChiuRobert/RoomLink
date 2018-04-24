@@ -39,8 +39,12 @@ public class BuildingBean implements Serializable{
 		return "buildingList.xhtml?faces-redirect=true";	
 	}
 
-	public String deleteBuilding(Building building) {		
-		buildingManagerBean.remove(building);
+	public String deleteBuilding(Building building) {	
+		try {
+			buildingManagerBean.remove(building);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 		
 		return "buildingList.xhtml?faces-redirect=true";
 	}

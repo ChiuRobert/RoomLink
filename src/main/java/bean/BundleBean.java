@@ -96,7 +96,11 @@ public class BundleBean implements Serializable{
 	}
 	
 	public String deleteBundle(Bundle bundle) {		
-		bundleManagerBean.remove(bundle);
+		try {
+			bundleManagerBean.remove(bundle);
+		} catch (Exception e) { 
+			System.out.println("Error: " + e.getMessage());
+		}
 		
 		return "roomList.xhtml?faces-redirect=true";
 	}

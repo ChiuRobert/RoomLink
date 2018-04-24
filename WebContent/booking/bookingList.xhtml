@@ -35,7 +35,7 @@
                 	<!-- <f:convertDateTime pattern="dd/MM/yyyy HH:mm" /> -->
                	</h:outputText>
             </h:column>                                                            
-            <h:column>
+            <h:column rendered="false">
                 <f:facet name="header">Update</f:facet>
                 <h:commandButton action="#{bookingBean.editBookingDetailsById(booking)}" value="Update" styleClass="btn btn-primary" />
             </h:column>

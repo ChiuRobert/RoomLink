@@ -56,6 +56,7 @@ public class RoomBean implements Serializable{
 		boolean canAdd = true;
 		Building building = null;
 		Bundle bundle = null;
+		room = null;
 		
 		try {
 			if (buildingString == null) {
@@ -66,7 +67,11 @@ public class RoomBean implements Serializable{
 			showMessage("You need to choose a building.");
 			canAdd = false;
 		}
+		
 		try {
+			if (bundleString == null) {
+				throw new NullPointerException();
+			}
 			bundle = bundleManagerBean.getById(Integer.parseInt(bundleString.substring(0, bundleString.indexOf(' '))));
 		} catch (Exception e) {
 			showMessage("You need to choose a bundle.");
@@ -74,6 +79,7 @@ public class RoomBean implements Serializable{
 		}
 			
 		if (canAdd) {
+			room = new Room();
 			room.setBuilding(building);
 			room.setBundle(bundle);
 			room.setNumber(number);
@@ -86,8 +92,12 @@ public class RoomBean implements Serializable{
 		return "roomList.xhtml?faces-redirect=true";	
 	}
 	
-	public String deleteRoom(Room room) {		
-		roomManagerBean.remove(room);
+	public String deleteRoom(Room room) {
+		try {
+			roomManagerBean.remove(room);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 		
 		return "roomList.xhtml?faces-redirect=true";
 	}

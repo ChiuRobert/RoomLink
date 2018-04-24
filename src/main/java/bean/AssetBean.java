@@ -39,8 +39,12 @@ public class AssetBean implements Serializable{
 		return "assetList.xhtml?faces-redirect=true";	
 	}
 
-	public String deleteAsset(Asset asset) {		
-		assetManagerBean.remove(asset);
+	public String deleteAsset(Asset asset) {	
+		try {
+			assetManagerBean.remove(asset);
+		} catch(Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 		
 		return "assetList.xhtml?faces-redirect=true";
 	}

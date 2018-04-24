@@ -48,7 +48,11 @@ public class UserBean implements Serializable{
 	}
 
 	public String deleteUser(User user) {		
-		userManagerBean.remove(user);
+		try {
+			userManagerBean.remove(user);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 		
 		return "usersList.xhtml?faces-redirect=true";
 	}

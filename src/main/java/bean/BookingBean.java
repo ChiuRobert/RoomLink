@@ -225,8 +225,12 @@ public class BookingBean implements Serializable {
 	}
 
 	public String deleteBooking(Booking booking) {
-		bookingManagerBean.remove(booking);
-
+		try {
+			bookingManagerBean.remove(booking);
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
 		return "bookingList.xhtml?faces-redirect=true";
 	}
 
