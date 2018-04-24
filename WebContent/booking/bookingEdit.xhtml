@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<h:head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="table.css" />	    
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <title>Room Link</title>
+</h:head>
+
+<h:body>
+	<center><h2><h:outputText value="Edit Room"/></h2></center>	
+    <h:form id="editRoomForm" styleClass="form-horizontal">         
+	    <p:growl id="msgs" showDetail="true" />
+	    <p:panel style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+	          <p:outputLabel for="number" value="Number:" />
+	          <p:inputText id="number" value="#{roomBean.number}" required="false" label="number" />
+	          
+			  <p:outputLabel for="bundle" value="Assets " />
+	          <p:selectOneMenu id="bundle" value="#{roomBean.bundle}" style="width:300px">
+	              <f:selectItem itemLabel="Select Assets" itemValue="" noSelectionOption="true" />
+	              <f:selectItems value="#{roomBean.bundleList}" />
+	          </p:selectOneMenu>
+	
+	          <p:outputLabel for="building" value="Building:" />
+	          <p:inputText id="building" value="#{roomBean.building}" style="width:300px" readonly="true" />
+			</h:panelGrid>
+			<p:separator />
+			<p:commandButton value="Submit" update="msgs" actionListener="#{roomBean.updateRoomDetails()}" icon="ui-icon-check" />
+		</p:panel>
+		                                                            
+        <div class="form-group">
+            <div class="col-sm-2" />
+            <div class="col-sm-4">
+                <h:commandButton value="Update" action="#{roomBean.updateRoomDetails()}" styleClass="btn btn-primary updateBtnStyle" rendered="false"/>
+            </div>
+            <div class="col-sm-1" />
+            <div class="col-sm-updated"><h:outputLink value="roomList.xhtml">View Rooms</h:outputLink></div>
+        </div>
+         <div class="text text-success text-edit"><h:message for="idInput" /></div>
+    </h:form>
+</h:body>
+</html>

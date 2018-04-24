@@ -38,6 +38,20 @@ public class RoomManagerBean implements Serializable{
 		return result;
 	}
 	
+	public List<Room> findByBuildingBundle(Building building, Bundle bundle) {
+		TypedQuery<Room> query = entityManager.createNamedQuery("Room_findByBundleBuilding", Room.class);
+		query.setParameter("building", building);
+		query.setParameter("bundle", bundle);
+		
+		List<Room> result = query.getResultList();
+		
+		if (result.isEmpty()) {
+			return null;
+		}
+		
+		return result;
+	}
+	
 	public List<Room> GetByBuilding(Building building) {
 		TypedQuery<Room> query = entityManager.createNamedQuery("Room_getByBuilding", Room.class);
 		query.setParameter("building", building);

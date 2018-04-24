@@ -5,17 +5,29 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="booking")
+@NamedQueries({
+	@NamedQuery(name="Booking_getAllBookings", query="SELECT booking FROM Booking booking"),
+	@NamedQuery(name="Booking_getUserBookings", query="SELECT booking FROM Booking booking WHERE booking.user= :user"),
+	@NamedQuery(name="Booking_getByBundleBuilding", query="SELECT booking FROM Booking booking WHERE booking.room.building= :building AND booking.room.bundle= :bundle"),
+	@NamedQuery(name="Booking_getByDate", query="SELECT booking FROM Booking booking WHERE booking.startDate>= :startDate AND booking.endDate<= :endDate"),
+	@NamedQuery(name="Booking_getByRoom", query="SELECT booking FROM Booking booking WHERE booking.room= :room")
+})
 public class Booking implements Serializable{
 
 	private static final long serialVersionUID = 1612790064226038851L;
 
+	private int id;
 	private User user;
 	private Room room;
 	private Date startDate;
@@ -31,6 +43,16 @@ public class Booking implements Serializable{
 	}
     
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
     @ManyToOne
     @JoinColumn(name = "userId")
 	public User getUser() {
@@ -40,7 +62,6 @@ public class Booking implements Serializable{
 		this.user = user;
 	}
 	
-    @Id
     @ManyToOne
     @JoinColumn(name = "roomId")
 	public Room getRoom() {

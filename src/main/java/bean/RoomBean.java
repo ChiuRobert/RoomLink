@@ -67,7 +67,7 @@ public class RoomBean implements Serializable{
 			canAdd = false;
 		}
 		try {
-			bundle = bundleManagerBean.getById(Integer.parseInt(bundleString.substring(0, 1)));
+			bundle = bundleManagerBean.getById(Integer.parseInt(bundleString.substring(0, bundleString.indexOf(' '))));
 		} catch (Exception e) {
 			showMessage("You need to choose a bundle.");
 			canAdd = false;
@@ -105,7 +105,7 @@ public class RoomBean implements Serializable{
 		boolean canUpdate = true;
 		
 		if (bundleString != null) {
-			Bundle bundle = bundleManagerBean.getById(Integer.parseInt(bundleString.substring(0, 1)));
+			Bundle bundle = bundleManagerBean.getById(Integer.parseInt(bundleString.substring(0, bundleString.indexOf(' '))));
 			roomManagerBean.UpdateBundle(room.getId(), bundle);
 		} else {
 			showMessage("You need to choose a bundle.");

@@ -23,7 +23,7 @@
                 <f:facet name="header">Assets</f:facet>
                 <h:outputText value="#{bundle}" />
             </h:column>                        
-            <h:column>
+            <h:column rendered="false">
                 <f:facet name="header">Update</f:facet>
                 <h:commandButton action="#{bundleBean.editBundleDetailsById(bundle)}" value="Update" styleClass="btn btn-primary" />
             </h:column>

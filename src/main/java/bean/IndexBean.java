@@ -28,15 +28,19 @@ public class IndexBean implements Serializable{
 	private boolean isUser;
 	private boolean loggedIn;
 	
+	private User user;
+	
 	@PostConstruct
 	public void init() {
+		user = new User();
+		
 		isAdmin = false;
 		isUser = false;
 		loggedIn = false;
 	}
 	
 	public void checkUser() {
-		User user = userManagerBean.findByName(userName);
+		user = userManagerBean.findByName(userName);
 		
 		if (user == null) {
 			showMessage("Incorrect user name.");
@@ -59,6 +63,10 @@ public class IndexBean implements Serializable{
 				userName = user.getPassword();
 			}
 		}
+	}
+	
+	public User getUser() {
+		return user;
 	}
 	
 	public void signOut() {

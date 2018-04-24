@@ -40,7 +40,7 @@ public class Bundle implements Serializable{
 		this.id = id;
 	}
 	
-	@ManyToMany(mappedBy = "bundleList", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "bundleList", cascade = CascadeType.MERGE)
 	public List<Asset> getAssetList() {
 		return assetList;
 	}

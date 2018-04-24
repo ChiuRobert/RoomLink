@@ -30,12 +30,13 @@
 	        	<p:inputText id="password" value="#{indexBean.password}" required="true" type="password" label="password" rendered="#{!indexBean.loggedIn}"/>
 	        </h:panelGrid>
 			<p:separator />
-			<p:commandButton value="Log in" update="msgs user panel" actionListener="#{indexBean.checkUser()}" icon="ui-icon-check" />
-			<p:commandButton value="Log out" update="msgs user panel" actionListener="#{indexBean.signOut()}" icon="ui-icon-check" />
+			<p:commandButton value="Log in" update="msgs user panel" actionListener="#{indexBean.checkUser()}" icon="ui-icon-check" rendered="#{!indexBean.loggedIn}"/>
+			<p:commandButton value="Log out" update="msgs user panel" actionListener="#{indexBean.signOut()}" icon="ui-icon-check" rendered="#{indexBean.loggedIn}"/>
 		</p:panel>
 		
 		<p:panel id="user">
 			<c:if test="#{indexBean.isAdmin}">
+				<p:commandButton action="/booking/bookingList.xhtml?faces-redirect=true" value="Bookings" styleClass="btn btn-success btnSpace" />
 				<p:commandButton action="/room/roomList.xhtml?faces-redirect=true" value="Rooms" styleClass="btn btn-success btnSpace" />
 				<h:commandButton action="/user/usersList.xhtml?faces-redirect=true" value="Users" styleClass="btn btn-success btnSpace" />
 				<h:commandButton action="/building/buildingList.xhtml?faces-redirect=true" value="Buildings" styleClass="btn btn-success btnSpace" />
@@ -44,7 +45,7 @@
 			</c:if>
 			
 			<c:if test="#{indexBean.isUser}">
-				<p:commandButton action="/room/roomList.xhtml?faces-redirect=true" value="Rooms" styleClass="btn btn-success btnSpace" />
+				<p:commandButton action="/booking/bookingList.xhtml?faces-redirect=true" value="Bookings" styleClass="btn btn-success btnSpace" />
 			</c:if>
 		</p:panel>
 		<div class="text text-success text-edit"><h:message for="idInput" /></div>		

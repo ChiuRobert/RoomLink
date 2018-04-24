@@ -74,7 +74,7 @@ public class User implements Serializable{
 		this.admin = admin;
 	}
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
 	public List<Booking> getUserRoomList() {
 		return userRoomList;
 	}

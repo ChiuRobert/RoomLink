@@ -58,7 +58,7 @@ public class Building implements Serializable{
 		this.name = name;
 	}
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="building", orphanRemoval = true)
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy="building", orphanRemoval = true)
     @JoinColumn(name = "bulding")
 	public List<Room> getRoomList() {
 		return roomList;

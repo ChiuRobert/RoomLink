@@ -22,6 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="room")
 @NamedQueries({
+	@NamedQuery(name="Room_findByBundleBuilding", query="SELECT room FROM Room room WHERE room.building= :building AND room.bundle= :bundle"),
 	@NamedQuery(name="Room_getAllRooms", query="SELECT room FROM Room room"),
 	@NamedQuery(name="Room_getById", query="SELECT room FROM Room room WHERE room.id= :id"),
 	@NamedQuery(name="Room_getByBuilding", query="SELECT room FROM Room room WHERE room.building= :building"),
@@ -63,7 +64,7 @@ public class Room implements Serializable{
 		this.number = number;
 	}
 	
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "bundle")
 	public Bundle getBundle() {
 		return bundle;
@@ -80,7 +81,7 @@ public class Room implements Serializable{
 		this.userRoomList = userRoomList;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)   
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)   
 	@JoinColumn(name = "building")
 	public Building getBuilding() {
 		return building;
